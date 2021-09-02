@@ -21,17 +21,18 @@ const searchBook = async () => {
             bookDetails(data)
         }
         catch (error) {
-            // displayError(error)
-            console.log(error);
+            displayError(error)
+            // console.log(error);
         }
     }
 }
 searchBook()
 
-// const displayError = error => {
-//     document.getElementById('error-message').style.display = 'block';
-// }
 
+// error message
+const displayError = (display, error) => {
+    document.getElementById('error-message').style.display = display;
+}
 
 
 
@@ -42,33 +43,35 @@ const bookDetails = data => {
     searchResult.textContent = '';
 
 
-
     // total search result
     document.getElementById('total').innerText = numFound;
     document.getElementById('founded-book').innerText = data.docs.length;
 
-    // error message
-    // displayError()
 
+    if (docs.length === 0) {
+        displayError('block')
+    }
+    else {
+        displayError('none')
+        docs.forEach(book => {
+            // console.log(book)
 
-
-    docs.forEach(book => {
-        // console.log(book)
-
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div class="card">
-            <img  src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top w-50 mx-auto" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${book.title}</h5>
-                <h6> Author : ${book.author_name[0] ? book.author_name[0] : 'unknown'}</h6>
-                <h6> publisher : ${book.publisher[0] ? book.publisher[0] : 'unknown'}
-                <p class="card-text">${book.first_publish_year}</p>
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+            <div class="card">
+                <img  src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top w-50 mx-auto" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${book.title}</h5>
+                    <h6> Author : ${book.author_name[0] ? book.author_name[0] : 'unknown'}</h6>
+                    <h6> publisher : ${book.publisher[0] ? book.publisher[0] : 'unknown'}
+                    <p class="card-text">${book.first_publish_year}</p>
+                </div>
             </div>
-        </div>
-        `;
-        searchResult.appendChild(div);
-    })
+            `;
+            searchResult.appendChild(div);
+        })
+    }
+
 
 }

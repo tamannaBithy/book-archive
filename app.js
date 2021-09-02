@@ -45,6 +45,7 @@ const bookDetails = data => {
 
     // total search result
     document.getElementById('total').innerText = numFound;
+    document.getElementById('founded-book').innerText = data.docs.length;
 
     // error message
     // displayError()
@@ -62,6 +63,7 @@ const bookDetails = data => {
             <div class="card-body">
                 <h5 class="card-title">${book.title}</h5>
                 <h6> Author : ${book.author_name[0] ? book.author_name[0] : 'unknown'}</h6>
+                <h6> publisher : ${book.publisher[0] ? book.publisher[0] : 'unknown'}
                 <p class="card-text">${book.first_publish_year}</p>
             </div>
         </div>

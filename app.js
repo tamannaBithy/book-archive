@@ -4,13 +4,34 @@ const searchBook = async () => {
     //    clear
     searchField.value = '';
 
-    const url = `http://openlibrary.org/search.json?q=${searchText}`
-    const res = await fetch(url);
-    const data = await res.json();
-    // console.log(data.docs)
-    bookDetails(data)
+    if (searchText == '') {
+        document.getElementById('search-result').style.display = 'none';
+        document.getElementById('empty-string').style.display = 'block';
+
+    }
+    else {
+        document.getElementById('search-result').style.display = 'block';
+        document.getElementById('empty-string').style.display = 'none';
+
+        // load data
+        const url = `http://openlibrary.org/search.json?q=${searchText}`
+        try {
+            const res = await fetch(url);
+            const data = await res.json()
+            bookDetails(data)
+        }
+        catch (error) {
+            // displayError(error)
+            console.log(error);
+        }
+    }
 }
 searchBook()
+
+// const displayError = error => {
+//     document.getElementById('error-message').style.display = 'block';
+// }
+
 
 
 
@@ -19,12 +40,15 @@ const bookDetails = data => {
     const { numFound, docs } = data
     const searchResult = document.getElementById('book-details');
     searchResult.textContent = '';
-    // if (data.length == 0) {
-    //     // show no result found;
-    // }
+
+
 
     // total search result
     document.getElementById('total').innerText = numFound;
+
+    // error message
+    // displayError()
+
 
 
     docs.forEach(book => {

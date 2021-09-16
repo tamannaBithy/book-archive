@@ -1,3 +1,15 @@
+// for keyboard method
+let searchButton = document.getElementById("search-btn");
+let inputValue = document.getElementById("input-value");
+
+inputValue.addEventListener("keypress", function (event) {
+    // event.preventDefault();
+    if (event.key === 'Enter')
+        searchButton.click();
+});
+
+
+
 const searchBook = async () => {
     const searchField = document.getElementById('input-value');
     const searchText = searchField.value;
@@ -45,7 +57,6 @@ const bookDetails = data => {
 
     // total search result
     document.getElementById('total').innerText = numFound;
-    document.getElementById('founded-book').innerText = data.docs.length;
 
 
     if (docs.length === 0) {
@@ -70,6 +81,12 @@ const bookDetails = data => {
             </div>
             `;
             searchResult.appendChild(div);
+
+
+            // for ui result
+            // const ui = searchResult.childNodes.length
+            // console.log(ui)
+            document.getElementById("ui").innerText = searchResult.childNodes.length;
         })
     }
 

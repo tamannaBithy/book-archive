@@ -27,14 +27,16 @@
             <div class="d-flex m-auto w-75">
                 <input class="form-control me-2" type="search" placeholder="Search Your Book" aria-label="Search"
                     id="input-value" />
-                <button onclick="searchBook()" class="btn btn-outline-primary" type="text">
+                <button id="search-btn" onclick="searchBook()" class="btn btn-outline-primary" type="text">
                     Search
                 </button>
             </div>
 
             <!-- total search result -->
             <div class="text-center mt-3 text-primary" id="search-result">
-                <p>Total Search Result <span id="total">0</span> & you got <span id="founded-book">0</span> books </p>
+                <p>Total Search Result <span id="total">0</span>
+                    & you got <span id="ui">0</span> books
+                </p>
             </div>
 
             <!-- founded books -->
